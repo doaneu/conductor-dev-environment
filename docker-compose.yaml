@@ -1,0 +1,90 @@
+version: '2.3'
+
+services:
+  conductor-server:
+    environment:
+      - CONFIG_PROP=config.properties
+    image: doaneu/conductor.server:v3.13.3
+    networks:
+      - internal
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl","-I" ,"-XGET", "http://localhost:8080/health"]
+      interval: 60s
+      timeout: 30s
+      retries: 12
+    links:
+      - elasticsearch:conductor-es-svc
+      - redis:conductor-redis-svc
+    depends_on:
+      elasticsearch:
+        condition: service_healthy          
+      redis:
+        condition: service_healthy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"
+
+  conductor-ui:
+    environment:
+      - WF_SERVER=http://conductor-server:8080
+    image: doaneu/conductor.ui:v3.13.3
+    networks:
+      - internal
+    ports:
+      - 5000:5000
+    links:
+      - conductor-server
+    stdin_open: true
+
+  elasticsearch:
+    image: elasticsearch:6.8.15
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m"
+      - transport.host=0.0.0.0
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - esdata-conductor:/usr/share/elasticsearch/data
+    networks:
+      - internal
+    ports:
+      - 9200:9200
+      - 9300:9300
+    healthcheck:
+      test: timeout 5 bash -c 'cat < /dev/null > /dev/tcp/localhost/9200'
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"
+    
+  redis:
+    image: redis:7.0.8-alpine3.17
+    networks:
+      - internal
+    ports:
+      - 6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"  
+
+volumes:
+  esdata-conductor:
+    driver: local
+
+networks:
+  internal:
