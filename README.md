@@ -14,8 +14,8 @@ Clone to your machine and change into the cloned directory. Open a command promp
 
 Once all containers are running the UI and server are accessible using localhost links  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI :  &nbsp;&nbsp;http://localhost:8091  
-Server :&nbsp;&nbsp; http://localhost:8090 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI :  &nbsp;&nbsp;http://localhost:8090  
+Server :&nbsp;&nbsp; http://localhost:8091
 
 
   
