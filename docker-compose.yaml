@@ -8,7 +8,7 @@ services:
     networks:
       - internal
     ports:
-      - 8080:8080
+      - 8091:8080
     healthcheck:
       test: ["CMD", "curl","-I" ,"-XGET", "http://localhost:8080/health"]
       interval: 60s
@@ -30,12 +30,12 @@ services:
 
   conductor-ui:
     environment:
-      - WF_SERVER=http://conductor-server:8080
+      - WF_SERVER=http://conductor-server:8091
     image: doaneu/conductor.ui:v3.13.3
     networks:
       - internal
     ports:
-      - 5000:5000
+      - 8090:5000
     links:
       - conductor-server
     stdin_open: true
