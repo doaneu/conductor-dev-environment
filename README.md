@@ -5,7 +5,7 @@ Repository contains the data nessecary to create a local Conductor environment f
 
 To bring up the environment you need:
  - Docker & Docker Compose (installed and running)
- - TCP/UDP Ports 8080 (conductor server), 5000 (conductor ui) unused
+ - TCP/UDP Ports 8080 (conductor server, ui)
  - At least 1 gigabyte of RAM free for use
 
 Clone to your machine and change into the cloned directory. Open a command prompt in the directory and run 
@@ -14,9 +14,8 @@ Clone to your machine and change into the cloned directory. Open a command promp
 
 Once all containers are running the UI and server are accessible using localhost links  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI :  &nbsp;&nbsp;http://localhost:5000  
-Server :&nbsp;&nbsp; http://localhost:8080
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    UI :  &nbsp;&nbsp; http://localhost:5000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Server :  &nbsp;&nbsp; http://localhost:8080
 
 
-  
 Have Fun!

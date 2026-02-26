@@ -1,10 +1,11 @@
-version: '2.3'
-
 services:
   conductor-server:
     environment:
       - CONFIG_PROP=config-postgres.properties
-    image: doaneu/conductor.server:main
+    image: doaneu/conductoross.server:latest
+    volumes:
+      # Format: "host-path:container-path"
+      - ./config/config-postgres.properties:/app/config/config-postgres.properties
     restart: always
     networks:
       - internal
