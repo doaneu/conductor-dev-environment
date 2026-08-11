@@ -2,7 +2,7 @@ services:
   conductor-server:
     environment:
       - CONFIG_PROP=config-postgres.properties
-    image: doaneu/conductoross.server:v3.22.0
+    image: doaneu/conductoross.server:v3.4.0
     volumes:
       # Format: "host-path:container-path"
       - ./config/config-postgres.properties:/app/config/config-postgres.properties
